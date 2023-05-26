@@ -13,7 +13,7 @@ userForm.loginFormCallback = data => {
         }
         
         if (result.success === false) {
-            throw new Error(result.error);
+            userForm.setLoginErrorMessage(result.error);
         }
     });
 }   
@@ -31,7 +31,7 @@ userForm.registerFormCallback = data => {
         }
         
         if (result.success === false) {
-            throw new Error(result.error);
+            userForm.setRegisterErrorMessage(result.error);
         }
     });
 }

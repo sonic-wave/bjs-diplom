@@ -34,9 +34,9 @@ moneyManager.addMoneyCallback = data => {
     ApiConnector.addMoney(data, (response) => {
         if (response.success === true) {
             ProfileWidget.showProfile(response.data);
-            moneyManager.setMessage(true, "Вы успешно пополнили счёт");
+            moneyManager.setMessage(response.success, "Вы успешно пополнили счёт");
         } else {
-            moneyManager.setMessage(false, "Не удалось пополнить счёт");
+            moneyManager.setMessage(response.success, response.error);
         }
     });
 }
@@ -45,9 +45,9 @@ moneyManager.conversionMoneyCallback = data => {
     ApiConnector.convertMoney(data, (response) => {
         if (response.success === true) {
             ProfileWidget.showProfile(response.data);
-            moneyManager.setMessage(true, "Вы успешно сконвертировали валюту");
+            moneyManager.setMessage(response.success, "Вы успешно сконвертировали валюту");
         } else {
-            moneyManager.setMessage(false, "Не удалось сконвертировать валюту");
+            moneyManager.setMessage(response.success, response.error);
         }
     });
 }
@@ -56,9 +56,9 @@ moneyManager.sendMoneyCallback = data => {
     ApiConnector.transferMoney(data, (response) => {
         if (response.success === true) {
             ProfileWidget.showProfile(response.data);
-            moneyManager.setMessage(true, "Вы успешно перевели валюту");
+            moneyManager.setMessage(response.success, "Вы успешно перевели средства");
         } else {
-            moneyManager.setMessage(false, "Не удалось перевести валюту");
+            moneyManager.setMessage(response.success, response.error);
         }
     });
 }
@@ -80,9 +80,9 @@ favoritesWidget.addUserCallback = data => ApiConnector.addUserToFavorites(data, 
         favoritesWidget.clearTable();
         favoritesWidget.fillTable(response.data);
         moneyManager.updateUsersList(response.data);
-        favoritesWidget.setMessage(true, "Вы успешно добавили пользователя");
+        favoritesWidget.setMessage(response.success, "Вы успешно добавили пользователя");
     } else {
-        favoritesWidget.setMessage(false, "Не удалось добавить пользователя");
+        favoritesWidget.setMessage(response.success, response.error);
     }
 });
 
@@ -91,8 +91,8 @@ favoritesWidget.removeUserCallback = data => ApiConnector.removeUserFromFavorite
         favoritesWidget.clearTable();
         favoritesWidget.fillTable(response.data);
         moneyManager.updateUsersList(response.data);
-        favoritesWidget.setMessage(true, "Вы успешно удалили пользователя");
+        favoritesWidget.setMessage(response.success, "Вы успешно удалили пользователя");
     } else {
-        favoritesWidget.setMessage(false, "Не удалось удалить пользователя");
+        favoritesWidget.setMessage(response.success, response.error);
     }
 });
